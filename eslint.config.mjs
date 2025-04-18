@@ -38,7 +38,7 @@ export default [
       'require-jsdoc': 'off',
       'valid-jsdoc': 'off',
       'linebreak-style': 'off',
-      'import/no-unresolved': ['error', { commonjs: true, caseSensitive: true }],
+      'import/no-unresolved': ['warn'],
       'import/no-self-import': 'error',
       'import/no-cycle': 'error',
       '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used' }],

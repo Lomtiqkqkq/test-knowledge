@@ -7,5 +7,9 @@ export class GetArticleUseCase {
     @Inject('IArticleRepository')
     private readonly articleRepository: IArticleRepository,
   ) {}
-  async execute() {}
+  async execute(tags?: string[]) {
+    return !tags?.length
+      ? this.articleRepository.get()
+      : this.articleRepository.get(tags);
+  }
 }

@@ -3,6 +3,7 @@ import { GetArticleUseCase } from '../../application/use-cases/article/get-artic
 import { GetByArticleUseCase } from '../../application/use-cases/article/getBy-article.use-case.js';
 import { SaveArticleUseCase } from '../../application/use-cases/article/save-article.use-case.js';
 import { DeleteArticleUseCase } from '../../application/use-cases/article/delete-article.use-case.js';
+import { ArticleEntity } from '../../core/entity/article.entity.js';
 
 @Controller('article')
 export class ArticleController {
@@ -18,10 +19,15 @@ export class ArticleController {
   }
   @Get(':field/:value')
   async getByArticle(
-    @Param('field') field: string,
-    @Param('value') value: string,
+    @Param('field') field: keyof ArticleEntity,
+    @Param('value') rawValue: string,
   ) {
-    return await this.getByArticleUseCase.execute(field, value);
+    let value: any;
+    value = rawValue;
+    return await this.getByArticleUseCase.execute(
+      field,
+      value as ArticleEntity[typeof field],
+    );
   }
   @Post('save')
   async saveArticle() {

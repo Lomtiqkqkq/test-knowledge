@@ -6,6 +6,7 @@ import { ArticleTypeormModel } from '../models/article.typeorm.model.js';
 export class ArticleMapper {
   toOrmEntity(articleEntity: ArticleEntity): ArticleTypeormModel {
     const ormArticle = new ArticleTypeormModel();
+    ormArticle.id = articleEntity.getId();
     ormArticle.header = articleEntity.getHeader();
     ormArticle.description = articleEntity.getDescription();
     ormArticle.tags = articleEntity.getTags();
@@ -14,6 +15,7 @@ export class ArticleMapper {
   }
   toDomainEntity(articleTypeOrmModel: ArticleTypeormModel): ArticleEntity {
     return new ArticleEntity(
+      articleTypeOrmModel.id,
       articleTypeOrmModel.header,
       articleTypeOrmModel.description,
       articleTypeOrmModel.tags,
